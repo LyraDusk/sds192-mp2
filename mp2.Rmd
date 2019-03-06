@@ -23,5 +23,7 @@ load("contributions.rda")
 
 ```
 
-
-> Word count: `r wordcountaddin::word_count()`
+```{r include=FALSE}
+# There is an error in the code below so I took it out for now.
+# > Word count: `r wordcountaddin::word_count()`
+```
