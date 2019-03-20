@@ -21,6 +21,18 @@ load("contributions.rda")
 
 ```{r}
 
+# Lauren setting up the Contributions Table
+contributions_clean <- contributions %>%
+  filter(transaction_type == "24A" | transaction_type == "24E") %>%
+  filter(transaction_amt > 0) %>%
+  spread(transaction_type, transaction_amt, fill = 0) %>%
+  rename(against = "24A") %>%
+  rename(support = "24E") %>%
+  select(cand_id, against, support) %>%
+  group_by(cand_id) %>%
+  summarize(total_for = sum(support), total_against = sum(against))
+
+
 ```
 
 ```{r include=FALSE}
