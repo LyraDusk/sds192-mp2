@@ -35,8 +35,8 @@ contributions_clean <- contributions %>%
 ```{r}
 # Carol's code 
 elections <- house_elections %>%
- filter(general_votes > 0, !is.na(fec_id)) %>%
- select(fec_id, incumbent, party, general_votes, ge_winner) %>%
+  filter(general_votes > 0, !is.na(fec_id)) %>%
+  select(fec_id, incumbent, party, general_votes, ge_winner) %>%
   rename(cand_id = fec_id) 
 
 # Neamat added a rename function so joining would be easier
