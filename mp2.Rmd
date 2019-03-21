@@ -35,19 +35,33 @@ contributions_clean <- contributions %>%
 ```{r}
 # Carol's code 
 elections <- house_elections %>%
- filter(general_votes > 0) %>%
- select(fec_id, incumbent, party, general_votes, ge_winner) 
+ filter(general_votes > 0, !is.na(fec_id)) %>%
+ select(fec_id, incumbent, party, general_votes, ge_winner) %>%
+  rename(cand_id = fec_id) 
 
+# Neamat added a rename function so joining would be easier
 ```
 
 ```{r}
 # Neamat trying to inner join candidates ids
 
-elections %>% inner_join(contributions_clean,
-                         by = c("cand_id", "fec_id")) %>%
-  filter(!is.na(cand_id))
+joined_plot <- inner_join(contributions_clean, elections,
+                         by = "cand_id")
 ```
 
+```{r}
+# Neamat making it into a rough graph
+
+incumbent_plot <- ggplot(joined_plot, aes(x =(total_for), y = general_votes, color = incumbent)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  geom_jitter() +
+  scale_x_log10() +
+  scale_y_log10()+
+  ylim(3e+04, 3e+05) +
+  facet_wrap(~incumbent)
+
+incumbent_plot
+```
 
 ```{r include=FALSE}
 # There is an error in the code below so I took it out for now.
