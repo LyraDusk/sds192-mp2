@@ -51,6 +51,7 @@ joined_plot <- inner_join(contributions_clean, elections,
 
 ```{r}
 # Neamat making it into a rough graph
+# Everyone editing this rough graph into a final graph
 
 incumbent_plot <- ggplot(joined_plot, aes(x =(total_for), y = general_votes, color = incumbent)) +
   geom_smooth(method = "lm", se = FALSE, color = "black") +
