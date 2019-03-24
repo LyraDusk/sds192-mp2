@@ -77,10 +77,13 @@ incumbent_plot
 
 incumbents <- joined_plot %>%
   filter(incumbent == TRUE)
+
 Inc_model <- lm(general_votes~total_for, data = incumbents)
 summary(Inc_model)
+
 challengers <- joined_plot %>%
   filter(incumbent == FALSE)
+
 chall_model <- lm(general_votes ~ total_for, data = challengers)
 summary(chall_model)
 ```
