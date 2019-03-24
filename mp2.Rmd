@@ -4,12 +4,10 @@ author: "Carol, Lauren, Neamat"
 date: "2019-03-24"
 output: 
   html_document:
-    code_folding: show
+    code_folding: hide
 ---
 
-## Loading the data
-
-This project is so interesting and relevant to my life!
+## Data Graphic
 
 ```{r, echo=FALSE, message=FALSE}
 library(tidyverse)
@@ -20,7 +18,8 @@ load("contributions.rda")
 ```
 
 ```{r}
-# Lauren setting up the Contributions Table
+# Lauren setting up the Contributions Table for the inner_join()
+
 contributions_clean <- contributions %>%
   filter(transaction_type == "24A" | transaction_type == "24E") %>%
   filter(transaction_amt > 0) %>%
@@ -33,7 +32,8 @@ contributions_clean <- contributions %>%
 ```
 
 ```{r}
-# Carol's code 
+# Carol setting up the House Elections Table for the inner_join()
+
 elections <- house_elections %>%
  filter(general_votes > 0, !is.na(fec_id)) %>%
   
@@ -46,13 +46,13 @@ elections <- house_elections %>%
 ```
 
 ```{r}
-# Neamat trying to inner join candidates ids
+# Neamat trying to inner_join() by candidate's ids
 
 joined_plot <- inner_join(contributions_clean, elections,
                          by = "cand_id")
 ```
 
-```{r}
+```{r, warning=FALSE}
 # Neamat making it into a rough graph
 # Everyone editing this rough graph into a final graph
 
@@ -71,9 +71,6 @@ incumbent_plot
 ```
 
 ```{r include=FALSE}
-# There is an error in the code below so I took it out for now.
-# > Word count: `r wordcountaddin::word_count()`
-
 incumbents <- joined_plot %>%
   filter(incumbent == TRUE)
 
@@ -86,3 +83,5 @@ challengers <- joined_plot %>%
 chall_model <- lm(general_votes ~ total_for, data = challengers)
 summary(chall_model)
 ```
+
+> Word count: `r wordcountaddin::word_count()`
