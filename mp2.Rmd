@@ -11,6 +11,7 @@ output:
 
 ```{r, echo=FALSE, message=FALSE}
 library(tidyverse)
+library(wordcountaddin)
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
