@@ -73,7 +73,6 @@ incumbent_plot
 ```{r include=FALSE}
 # There is an error in the code below so I took it out for now.
 # > Word count: `r wordcountaddin::word_count()`
-#lauren fucking around
 
 incumbents <- joined_plot %>%
   filter(incumbent == TRUE)
